@@ -34,7 +34,6 @@ class AnimatedFigure:
         plt.show(block=block)
 
     def setup(self):
-        print("* setup")
         self.setup_actors = self.setup_actors or list(self._setup_animated_axes())
         return self.setup_actors
 
@@ -45,10 +44,7 @@ class AnimatedFigure:
             yield from tolist(animated_axes.setup(axes, x))
 
     def update(self, frame):
-        print("* update")
-        start = time.time()
         actors = list(self._update_animated_axes())
-        print(f"update time: {time.time() - start:.3f}")
         return actors
 
     def _update_animated_axes(self):
