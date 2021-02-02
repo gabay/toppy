@@ -5,19 +5,16 @@ from setuptools import find_packages, setup
 with open('README.md') as f:
     readme = f.read()
 
-with open('LICENSE') as f:
-    license = f.read()
-
 setup(
     name='toppy',
-    version='0.1.0',
-    description='Graphical system rsources monitor in python.',
+    version='0.1.1',
+    description='Graphical system rsources monitor in python',
     long_description=readme,
     long_description_content_type="text/markdown",
     author='Roi Gabay',
     author_email='roigby@gmail.com',
     url='https://github.com/gabay/toppy',
-    license=license,
+    license='MIT',
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
