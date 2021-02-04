@@ -1,5 +1,6 @@
 import argparse
 import math
+import sys
 import time
 from dataclasses import dataclass
 from typing import List, Type
@@ -7,14 +8,19 @@ from typing import List, Type
 import matplotlib.pyplot as plt
 import numpy as np
 
-from .plot import AnimatedFigure, CPUPlotter, GPUPlotter, IOPlotter, MemoryPlotter, NetworkPlotter
+from .plot import (AnimatedFigure, CPUPlotter, GPUPlotter, IOPlotter,
+                   MemoryPlotter, NetworkPlotter)
 
+if sys.platform == 'linux':
+    DEFAULT_PLOTTER_CLASSES = (CPUPlotter, GPUPlotter, MemoryPlotter, IOPlotter, NetworkPlotter)
+else:
+    DEFAULT_PLOTTER_CLASSES = (CPUPlotter, MemoryPlotter, IOPlotter, NetworkPlotter)
 
 @dataclass
 class ToppyArgs:
     update_interval: float = 1.0
     display_seconds: float = 60.0
-    plotter_classes: list = (CPUPlotter, GPUPlotter, MemoryPlotter, IOPlotter, NetworkPlotter)
+    plotter_classes: list = DEFAULT_PLOTTER_CLASSES
 
     @classmethod
     def parse_args(cls, args=None):

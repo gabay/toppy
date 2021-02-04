@@ -7,7 +7,7 @@ with open('README.md') as f:
 
 setup(
     name='toppy',
-    version='0.1.1',
+    version='0.1.2',
     description='Graphical system rsources monitor in python',
     long_description=readme,
     long_description_content_type="text/markdown",

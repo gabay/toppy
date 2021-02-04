@@ -7,7 +7,6 @@ class CPUStat:
         self.nice = None
         self.system = None
         self.idle = None
-        self.iowait = None
         self.utilization = None
 
 
@@ -23,5 +22,4 @@ class CPUStat:
         self.nice = stat.nice
         self.system = stat.system
         self.idle = stat.idle
-        self.iowait = stat.iowait
         self.utilization = 100 - stat.idle
