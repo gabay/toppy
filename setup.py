@@ -26,5 +26,6 @@ setup(
         'matplotlib>=3.3.4,<4',
         'psutil>=5.8.0,<6',
         'gpustat>=0.6.0,<1'
-    ]
+    ],
+    tests_require=['pytest>=6.2.2,<7']
 )
