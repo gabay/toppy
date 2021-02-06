@@ -15,7 +15,7 @@ def make_device_iostats(old_stats, new_stats, timediff):
 
 
 class IOStat:
-    def __init__(self, proc_diskstats_getter=None):
+    def __init__(self):
         self._stats = {}
         self._time = None
 

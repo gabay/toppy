@@ -6,7 +6,6 @@ class MemoryStat:
         self.mem = None
         self.swap = None
 
-
     def setup(self):
         self._update()
 
