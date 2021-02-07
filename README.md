@@ -1,4 +1,4 @@
-# TOPPY - Graphical system rsources monitor in python
+# TOPPY - Graphical system resources monitor in python
 
 Toppy is a graphical system resource monitor that uses matplotlib for plotting.
 
