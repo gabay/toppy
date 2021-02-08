@@ -6,13 +6,14 @@ import psutil
 
 device_iostats = namedtuple('device_iostats', 'read_time write_time busy_time')
 
-
 def make_device_iostats(old_stats, new_stats, timediff):
     read_time = (new_stats.read_time - old_stats.read_time) * 100 / timediff
     write_time = (new_stats.write_time - old_stats.write_time) * 100 / timediff
     busy_time = (new_stats.busy_time - old_stats.busy_time) * 100 / timediff
     return device_iostats(read_time, write_time, busy_time)
 
+def is_valid_name(name: str) -> bool:
+    return re.fullmatch(r"nvme\dn\d|sd\w|disk\d", name)
 
 class IOStat:
     def __init__(self):
@@ -39,10 +40,5 @@ class IOStat:
         }
 
     def _update(self):
-        self._stats = {
-            k: v for k, v in psutil.disk_io_counters(True).items() if self._is_valid_name(k)
-        }
+        self._stats = {k: v for k, v in psutil.disk_io_counters(True).items() if is_valid_name(k)}
         self._time = time.time()
-
-    def _is_valid_name(self, name: str) -> bool:
-        return re.fullmatch(r"nvme\dn\d|sd\w", name)
