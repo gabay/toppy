@@ -9,7 +9,10 @@ device_iostats = namedtuple('device_iostats', 'read_time write_time busy_time')
 def make_device_iostats(old_stats, new_stats, timediff):
     read_time = (new_stats.read_time - old_stats.read_time) * 100 / timediff
     write_time = (new_stats.write_time - old_stats.write_time) * 100 / timediff
-    busy_time = (new_stats.busy_time - old_stats.busy_time) * 100 / timediff
+    try:
+        busy_time = (new_stats.busy_time - old_stats.busy_time) * 100 / timediff
+    except:
+        busy_time = read_time + write_time
     return device_iostats(read_time, write_time, busy_time)
 
 def is_valid_name(name: str) -> bool:
