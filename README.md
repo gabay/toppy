@@ -15,4 +15,4 @@ Currently, displays 5 graphs:
 
 ## Execution
 
-`python -m toppy`
+`toppy`
