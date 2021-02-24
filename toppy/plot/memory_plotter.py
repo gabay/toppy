@@ -30,8 +30,8 @@ class MemoryPlotter(AnimatedAxes):
     def update(self):
         self.mem.update()
 
-        common.additem_cyclic_inplace(self.y_mem, self.mem.mem.used * 100 / self.mem.mem.total)
-        common.additem_cyclic_inplace(self.y_swap, self.mem.swap.used * 100 / self.mem.swap.total)
+        common.additem_cyclic_inplace(self.y_mem, self.mem.mem.percent)
+        common.additem_cyclic_inplace(self.y_swap, self.mem.swap.percent)
 
         self.line_mem.set_ydata(self.y_mem)
         self.line_swap.set_ydata(self.y_swap)
