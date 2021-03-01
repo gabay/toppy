@@ -1,5 +1,6 @@
 import math
 
+import matplotlib.pyplot as plt
 import numpy as np
 
 from ..system_stat import NetworkStat
@@ -30,6 +31,8 @@ class NetworkPlotter(AnimatedAxes):
         axes.tick_params('x', bottom=False, labelbottom=False)
         axes.grid(True, axis='y')
         axes.legend()
+        axes.yaxis.set_major_locator(plt.LinearLocator(5))
+        axes.yaxis.set_major_formatter(plt.FuncFormatter(self._format_ylabel))
 
         return self.lines
 
@@ -51,11 +54,17 @@ class NetworkPlotter(AnimatedAxes):
         for y in self.ys:
             if y[-1] != None:
                 ymax = max(ymax, y[y!=None].max())
-        ylim = 4 ** math.ceil(log4(ymax))
+        ylim = 2 ** math.ceil(math.log2(ymax))
         if self.ylim != ylim:
             self.ylim = ylim
             self.axes.set_ylim(0, self.ylim)
             self.axes.figure.canvas.resize_event()
 
-def log4(x):
-    return math.log2(x) / 2
+    def _format_ylabel(self, value, tick_number):
+        suffixes = ['B', 'KB', 'MB', 'GB', 'TB']
+        suffix_index = 0
+        while value >= 1024 and suffix_index < len(suffixes):
+            value = value / 1024
+            suffix_index += 1
+
+        return f'{value:.0f} {suffixes[suffix_index]}'
