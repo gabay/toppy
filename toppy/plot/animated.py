@@ -39,7 +39,7 @@ class AnimatedFigure:
 
     def _setup_animated_axes(self):
         x = np.arange(0, -self.display_seconds, -self.update_interval)[::-1]
-        axes = tolist(self.fig.subplots(len(self.animated_axes), 1))
+        axes = tolist(self.fig.subplots(len(self.animated_axes), 1, sharex=True))
         for animated_axes, axes in zip(self.animated_axes, axes):
             yield from tolist(animated_axes.setup(axes, x))
 
